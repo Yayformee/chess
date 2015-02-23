@@ -1,0 +1,5 @@
+[package]
+
+name = "chess"
+version = "1.0.0"
+authors = ["Alexander Knyazhevskiy"]
