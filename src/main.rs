@@ -92,3 +92,13 @@ fn mate(){
 	assert!(game.check_king_check(Color::White));
 	assert!(game.check_king_mate(Color::White));
 }
+
+#[test]
+fn promotion(){
+	let game = ChessBoard::new()
+		.apply_move_type(MoveType::parse("f2 f7").unwrap())
+		.apply_move_type(MoveType::parse("d1 f3").unwrap());
+		
+	assert!(game.check_king_check(Color::Black));
+	assert!(game.check_king_mate(Color::Black));
+}
