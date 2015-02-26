@@ -6,7 +6,6 @@ use board::ChessBoard;
 
 mod color;
 mod board;
-mod piece;
 mod chess_move;
 
 fn main() {
