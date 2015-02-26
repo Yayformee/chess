@@ -252,8 +252,8 @@ impl ChessBoard{
 	
 	pub fn check_king_mate(&self, color: Color) -> bool{
 		self.collect_piece_coords(color).iter().all(|&p|{
-			(0us .. 8).all(|x|{
-				(0us .. 8).all(|y|{
+			(0usize .. 8).all(|x|{
+				(0usize .. 8).all(|y|{
 					!self.check_move(MoveType::Basic(Move{
 						from: p,
 						to:   Point{x:x, y:y},
@@ -264,9 +264,9 @@ impl ChessBoard{
 	}
 	
 	fn collect_piece_coords(&self, color: Color) -> Vec<Point>{
-		(0us .. 8).flat_map(|x|(match color{
-			Color::White => 0us .. 2,
-			Color::Black => 6us .. 8,
+		(0usize .. 8).flat_map(|x|(match color{
+			Color::White => 0usize .. 2,
+			Color::Black => 6usize .. 8,
 		}).map(move |y|Point{x:x, y:y})).filter_map(|p|self.trace_moves(p)).collect()
 	}
 	
