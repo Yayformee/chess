@@ -13,8 +13,8 @@ impl Point{
 			
 			if x < 'a' || x > 'h' || y < '1' || y > '8' { None } else {
 				Some(Point{
-					x: x.to_digit(20).unwrap() - 10,
-					y: y.to_digit(10).unwrap() - 1,
+					x: x.to_digit(20).unwrap() as usize - 10,
+					y: y.to_digit(10).unwrap() as usize - 1,
 				})
 			}
 		}
