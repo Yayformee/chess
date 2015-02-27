@@ -1,4 +1,4 @@
-#![feature(core, io, unicode, collections)]
+#![feature(core, old_io, unicode, collections, str_words)]
 use std::old_io as io;
 use color::Color;
 use chess_move::MoveType;
@@ -6,7 +6,6 @@ use board::ChessBoard;
 
 mod color;
 mod board;
-mod piece;
 mod chess_move;
 
 fn main() {
