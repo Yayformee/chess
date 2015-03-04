@@ -118,13 +118,16 @@ impl ChessBoard{
 		}
 	}
 	
-	pub fn check_move(&self, mvt: MoveType, color: Color) -> bool{
-		(match mvt{
-			MoveType::Basic(mv) => self.check_basic_move(mv, color),
-			MoveType::EnPassant(mv) => self.check_enpassant(mv, color),
-			MoveType::Promotion(mv, piece) => self.check_promotion(mv, color, piece),
-			MoveType::Castling(mvk, mvr) => self.check_castling(mvk, mvr, color),
-		}) && !self.apply_move_type(mvt).check_king_check(color)
+	pub fn check_move(&self, opt: Option<MoveType>, color: Color) -> bool{
+		match opt{
+			None => false,
+			Some(mvt) => (match mvt{
+				MoveType::Basic(mv) => self.check_basic_move(mv, color),
+				MoveType::EnPassant(mv) => self.check_enpassant(mv, color),
+				MoveType::Promotion(mv, piece) => self.check_promotion(mv, color, piece),
+				MoveType::Castling(mvk, mvr) => self.check_castling(mvk, mvr, color),
+			}) && !self.apply_move_type(mvt).check_king_check(color)
+		}
 	}
 	
 	fn check_enpassant(&self, mv: Move, color: Color) -> bool{
@@ -254,10 +257,10 @@ impl ChessBoard{
 		self.collect_piece_coords(color).iter().all(|&p|{
 			(0usize .. 8).all(|x|{
 				(0usize .. 8).all(|y|{
-					!self.check_move(MoveType::Basic(Move{
+					!self.check_move(Some(MoveType::Basic(Move{
 						from: p,
 						to:   Point{x:x, y:y},
-					}), color)
+					})), color)
 				})
 			})
 		})
