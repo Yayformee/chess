@@ -1,5 +1,5 @@
-#![feature(core, old_io, unicode, collections, str_words)]
-use std::old_io as io;
+#![feature(core, io, unicode, collections, str_words)]
+use std::io::{stdin, BufRead};
 use color::Color;
 use chess_move::MoveType;
 use board::ChessBoard;
@@ -12,13 +12,13 @@ mod tests;
 fn main() {
 	let mut game_board = ChessBoard::new();
 	let mut current_color = Color::White;
+	let stdin = stdin();
 	
 	loop{
 		//display logic
 		println!("\n");
 		game_board.display();
-		println!("\n");
-		print!("Current color is {}", current_color.display());
+		print!("\nCurrent color is {}", current_color.display());
 		if game_board.check_king_check(current_color){
 			print!(". Your king is in check");
 			if game_board.check_king_mate(current_color){
@@ -29,7 +29,11 @@ fn main() {
 		println!(". Make your move: ");
 		
 		//input logic
-		let input = io::stdin().read_line().ok().expect("Failed to read line");
+		let mut input = String::new();
+		if let Err(_) = stdin.lock().read_line(&mut input){
+			println!("Failed to read line.");
+			continue;
+		}
 		let trimmed = input.trim();
 		if trimmed == "exit" {
 			return;

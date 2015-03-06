@@ -108,14 +108,16 @@ impl ChessBoard{
 	
 	pub fn display(&self){
 		println!(" | A| B| C| D| E| F| G| H|");
-		println!("--------------------------");
+		println!("---------------------------");
 		for (row, num) in self.board.iter().zip(0u8 .. 8).rev(){
 			print!("{}|", num + 1);
 			for tile in row.iter(){
 				print!("{}|", tile.display());
 			}
-			println!("\n--------------------------");
+			println!("{}", num + 1);
+			println!("---------------------------");
 		}
+		println!(" | A| B| C| D| E| F| G| H|");
 	}
 	
 	pub fn check_move(&self, opt: Option<MoveType>, color: Color) -> bool{

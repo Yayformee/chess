@@ -1,8 +1,6 @@
-#[allow(unused_imports)]
+#![allow(unused_imports)]
 use color::Color;
-#[allow(unused_imports)]
 use chess_move::MoveType;
-#[allow(unused_imports)]
 use board::ChessBoard;
 
 #[test]
